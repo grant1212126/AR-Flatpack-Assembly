@@ -142,8 +142,6 @@ PlayerSettings:
   bundleVersion: 0.1
   preloadedAssets:
   - {fileID: 11400000, guid: e394d4f3ac630fd4aab3062244446482, type: 2}
-  - {fileID: 11400000, guid: 8f161838ff5174643b7bb1598e1669f7, type: 2}
-  - {fileID: -4829076463756178798, guid: 8569b6ff03871dc4cb9a00d11d39bdb4, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -163,7 +161,8 @@ PlayerSettings:
   resetResolutionOnWindowResize: 0
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
-  applicationIdentifier: {}
+  applicationIdentifier:
+    Android: com.DefaultCompany.ARFlatpackAssembly
   buildNumber:
     Standalone: 0
     VisionOS: 0
@@ -849,7 +848,7 @@ PlayerSettings:
   hmiLogStartupTiming: 0
   hmiCpuConfiguration: 
   apiCompatibilityLevel: 6
-  activeInputHandler: 0
+  activeInputHandler: 2
   windowsGamepadBackendHint: 0
   cloudProjectId: 21b83bb6-15d0-4a7d-8ecd-5e0aa7aad90b
   framebufferDepthMemorylessMode: 0
