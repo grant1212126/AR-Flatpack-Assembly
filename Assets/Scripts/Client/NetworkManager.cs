@@ -1,6 +1,7 @@
-using RiptideNetworking;
-using RiptideNetworking.Utils;
+using Riptide;
+using Riptide.Utils;
 using UnityEngine;
+using System;
 
 public class NetworkManager : MonoBehaviour
 {
@@ -38,16 +39,49 @@ public class NetworkManager : MonoBehaviour
         RiptideLogger.Initialize(Debug.Log, Debug.Log, Debug.LogWarning, Debug.LogError, false);
 
         Client = new Client();
-        Client.Connect($"{ip}:{port}");
+        Client.ConnectionFailed += FailedToConnect;
+        Client.Disconnected += DidDisconnect;
+        Client.MessageReceived += OnMessagereceived;
+
     }
 
     private void FixedUpdate()
     {
-        Client.Tick();
+        Client.Update();
     }
 
     private void OnApplicationQuit()
     {
         Client.Disconnect();
+    }
+
+    public void Connect()
+    {
+        Client.Connect($"{ip}:{port}");
+    }
+    
+
+    private void FailedToConnect(object sender, EventArgs e)
+    {
+        UIManager.Singleton.BackToMain();
+    }
+    
+    private void DidDisconnect(object sender, EventArgs e)
+    {
+        UIManager.Singleton.BackToMain();
+    }
+
+    private void OnMessagereceived(object sender, EventArgs e)
+    {
+        Debug.Log("Message recieved through event");
+    }
+    
+    [MessageHandler(1)]
+    private static void HandleSomeMessageFromServer(Message message)
+    {
+        string text = message.GetString();
+        
+        Debug.Log("Messaged recieved through handler event");
+        Debug.Log(text);
     }
 }
